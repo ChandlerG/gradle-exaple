@@ -5,6 +5,10 @@ build/
 !**/src/main/**
 !**/src/test/**
 
+frontend/build
+frontend/.gradle
+frontend/node_modules
+src/main/resources/static
 ### STS ###
 .apt_generated
 .classpath
@@ -181,3 +185,4 @@ gradle-app.setting
 **/build/
 
 # End of https://www.gitignore.io/api/java,gradle,kotlin,intellij
+
