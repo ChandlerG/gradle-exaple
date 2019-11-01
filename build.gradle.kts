@@ -31,10 +31,11 @@ repositories {
 }
 tasks.withType<Test> {
     useJUnitPlatform()
+    dependsOn(":frontend:test")
 }
 
 tasks.withType<ProcessResources> {
-    dependsOn(":frontend:ProcessResources")
+    dependsOn(":frontend:install")
 }
 
 

@@ -6,20 +6,21 @@ plugins {
 }
 
 tasks {
-
     val yarnInstallTask = getByName<YarnTask>("yarn_install")
     val yarnBuildTask = getByName<YarnTask>("yarn_build")
+    val yarnTestTask = getByName<YarnTask>("yarn_testnowatch")
 
-    val yarnTestTask = getByName<YarnTask>("yarn_test")
-
-    withType <Test> {
-        dependsOn(yarnInstallTask)
+    register ("test") {
         dependsOn(yarnTestTask)
     }
 
-    register("ProcessResources") {
-        println("Yo gabba gabba")
+    register ("install"){
         dependsOn(yarnInstallTask)
+    }
+
+
+    register("build") {
+        dependsOn("install")
         dependsOn(yarnBuildTask)
         doLast {
             copy {
@@ -29,14 +30,4 @@ tasks {
         }
     }
 
-    register("build") {
-        dependsOn(yarnInstallTask)
-        dependsOn(yarnBuildTask)
-        doLast {
-            copy {
-                from("build")
-                into("../src/main/resources/static")
-            }
-        }
-    }
 }
